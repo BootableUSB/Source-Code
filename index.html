@@ -5,10 +5,10 @@
   <title>Bootable USBs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link
-  rel="icon"
-  type="image/png"
-  href="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
 
 <style>
 * {
@@ -17,7 +17,7 @@
   padding: 0;
 }
 
-/* QR CODE */
+/* ================= QR CODE ================= */
 .qr-container {
   position: fixed;
   bottom: 16px;
@@ -39,12 +39,14 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+/* HIDE QR ON MOBILE */
 @media (max-width: 768px) {
   .qr-container {
     display: none;
   }
 }
 
+/* ================= PAGE ================= */
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #ffffff;
@@ -83,7 +85,7 @@ body {
   color: #555;
 }
 
-/* LINKS CONTAINER */
+/* ================= LINKS ================= */
 .links {
   display: flex;
   flex-direction: column;
@@ -124,11 +126,6 @@ body {
   object-fit: contain;
 }
 
-.text {
-  display: flex;
-  flex-direction: column;
-}
-
 .title {
   font-weight: 600;
   font-size: 0.95rem;
@@ -151,6 +148,7 @@ body {
   font-weight: 600;
 }
 
+/* ================= FOOTER ================= */
 .footer {
   margin-top: 32px;
   text-align: center;
@@ -169,10 +167,20 @@ body {
 
 <body>
 
+<!-- QR CODE (DESKTOP ONLY) -->
+<div class="qr-container">
+  <div class="qr-text">View on mobile</div>
+  <img
+    class="qr-image"
+    src="https://i.postimg.cc/fTNmG0Gp/Guest-Cam-Qr-Code.png"
+    alt="View on mobile QR code">
+</div>
+
 <div class="page">
 
   <div class="header">
-    <img class="avatar" src="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
+    <img class="avatar"
+      src="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
     <div class="name">Bootable USBs</div>
     <div class="bio">We sell super-fast, trusted, bootable Windows & Linux USBs.</div>
   </div>
@@ -181,57 +189,57 @@ body {
 
     <a class="link coming-soon">
       <img class="icon" src="https://www.facebook.com/favicon.ico">
-      <div class="text"><div class="title">Facebook</div></div>
+      <div class="title">Facebook</div>
     </a>
 
     <a class="link" href="https://www.instagram.com/aberiaofficial2025/" target="_blank">
       <img class="icon" src="https://i.postimg.cc/BnS5K0bG/instagram-logo-971166-164497.avif">
-      <div class="text"><div class="title">Instagram</div></div>
+      <div class="title">Instagram</div>
     </a>
 
     <a class="link coming-soon">
       <img class="icon" src="https://abs.twimg.com/favicons/twitter.2.ico">
-      <div class="text"><div class="title">Twitter</div></div>
+      <div class="title">Twitter</div>
     </a>
 
     <a class="link" href="https://www.tiktok.com/@bootableusb?lang=en-GB" target="_blank">
       <img class="icon" src="https://www.tiktok.com/favicon.ico">
-      <div class="text"><div class="title">TikTok</div></div>
+      <div class="title">TikTok</div>
     </a>
 
     <a class="link coming-soon">
       <img class="icon" src="https://www.snapchat.com/favicon.ico">
-      <div class="text"><div class="title">Snapchat</div></div>
+      <div class="title">Snapchat</div>
     </a>
 
     <a class="link" href="https://www.reddit.com/user/Flat_Pin1568/" target="_blank">
       <img class="icon" src="https://www.redditstatic.com/favicon.ico">
-      <div class="text"><div class="title">Reddit</div></div>
+      <div class="title">Reddit</div>
     </a>
 
     <a class="link" href="https://mastodon.social/@BootableUSB" target="_blank">
       <img class="icon" src="https://i.postimg.cc/bJtVBhQw/images-removebg-preview.png">
-      <div class="text"><div class="title">Mastodon</div></div>
+      <div class="title">Mastodon</div>
     </a>
 
     <a class="link" href="https://odysee.com/@BootableUSB:3" target="_blank">
       <img class="icon" src="https://i.postimg.cc/gJhGdr9W/bvwdwykz7geun0v3cqog.avif">
-      <div class="text"><div class="title">Odysee</div></div>
+      <div class="title">Odysee</div>
     </a>
 
     <a class="link" href="https://github.com/BootableUSB" target="_blank">
       <img class="icon" src="https://github.githubassets.com/favicons/favicon.png">
-      <div class="text"><div class="title">GitHub</div></div>
+      <div class="title">GitHub</div>
     </a>
 
     <a class="link coming-soon">
       <img class="icon" src="https://www.amazon.com/favicon.ico">
-      <div class="text"><div class="title">Amazon</div></div>
+      <div class="title">Amazon</div>
     </a>
 
     <a class="link coming-soon">
       <img class="icon" src="https://www.ebay.com/favicon.ico">
-      <div class="text"><div class="title">eBay</div></div>
+      <div class="title">eBay</div>
     </a>
 
   </div>
