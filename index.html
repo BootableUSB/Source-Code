@@ -83,17 +83,15 @@ body {
   color: #555;
 }
 
-/* BACKGROUND BEHIND LINKS ONLY */
+/* LINKS CONTAINER */
 .links {
   display: flex;
   flex-direction: column;
   gap: 14px;
-
   background-image: url("https://i.postimg.cc/hvFZWtnN/Screenshot-2026-01-15-14-23-12.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   padding: 16px;
   border-radius: 20px;
 }
@@ -124,13 +122,11 @@ body {
   background: #f2f2f2;
   padding: 4px;
   object-fit: contain;
-  flex-shrink: 0;
 }
 
 .text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
 }
 
 .title {
@@ -138,9 +134,21 @@ body {
   font-size: 0.95rem;
 }
 
-.subtitle {
-  font-size: 0.75rem;
-  color: #777;
+/* COMING SOON */
+.link.coming-soon {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.link.coming-soon::after {
+  content: "Coming soon";
+  position: absolute;
+  right: 16px;
+  font-size: 0.7rem;
+  color: #999;
+  font-weight: 600;
 }
 
 .footer {
@@ -155,42 +163,76 @@ body {
   margin-bottom: 6px;
   display: inline-block;
   border-bottom: 1px solid #777;
-  padding-bottom: 2px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="qr-container">
-  <div class="qr-text">View on mobile</div>
-  <img class="qr-image"
-       src="https://i.postimg.cc/fTNmG0Gp/Guest-Cam-Qr-Code.png"
-       alt="View on mobile QR code">
-</div>
-
 <div class="page">
 
   <div class="header">
-    <img class="avatar"
-      src="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
+    <img class="avatar" src="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
     <div class="name">Bootable USBs</div>
     <div class="bio">We sell super-fast, trusted, bootable Windows & Linux USBs.</div>
   </div>
 
   <div class="links">
 
-    <a class="link" href="https://www.facebook.com/" target="_blank"><img class="icon" src="https://www.facebook.com/favicon.ico"><div class="text"><div class="title">Facebook</div></div></a>
-    <a class="link" href="https://www.instagram.com/aberiaofficial2025/" target="_blank"><img class="icon" src="https://i.postimg.cc/BnS5K0bG/instagram-logo-971166-164497.avif"><div class="text"><div class="title">Instagram</div></div></a>
-    <a class="link" href="https://x.com/" target="_blank"><img class="icon" src="https://abs.twimg.com/favicons/twitter.2.ico"><div class="text"><div class="title">Twitter</div></div></a>
-    <a class="link" href="https://www.tiktok.com/@bootableusb?lang=en-GB" target="_blank"><img class="icon" src="https://www.tiktok.com/favicon.ico"><div class="text"><div class="title">TikTok</div></div></a>
-    <a class="link" href="https://www.snapchat.com/" target="_blank"><img class="icon" src="https://www.snapchat.com/favicon.ico"><div class="text"><div class="title">Snapchat</div></div></a>
-    <a class="link" href="https://www.reddit.com/user/Flat_Pin1568/" target="_blank"><img class="icon" src="https://www.redditstatic.com/favicon.ico"><div class="text"><div class="title">Reddit</div></div></a>
-    <a class="link" href="https://mastodon.social/@BootableUSB" target="_blank"><img class="icon" src="https://i.postimg.cc/bJtVBhQw/images-removebg-preview.png"><div class="text"><div class="title">Mastodon</div></div></a>
-    <a class="link" href="https://odysee.com/@BootableUSB:3" target="_blank"><img class="icon" src="https://i.postimg.cc/gJhGdr9W/bvwdwykz7geun0v3cqog.avif"><div class="text"><div class="title">Odysee</div></div></a>
-    <a class="link" href="https://github.com/BootableUSB" target="_blank"><img class="icon" src="https://github.githubassets.com/favicons/favicon.png"><div class="text"><div class="title">GitHub</div></div></a>
-    <a class="link" href="https://www.amazon.com/" target="_blank"><img class="icon" src="https://www.amazon.com/favicon.ico"><div class="text"><div class="title">Amazon</div></div></a>
-    <a class="link" href="https://www.ebay.com/" target="_blank"><img class="icon" src="https://www.ebay.com/favicon.ico"><div class="text"><div class="title">eBay</div></div></a>
+    <a class="link coming-soon">
+      <img class="icon" src="https://www.facebook.com/favicon.ico">
+      <div class="text"><div class="title">Facebook</div></div>
+    </a>
+
+    <a class="link" href="https://www.instagram.com/aberiaofficial2025/" target="_blank">
+      <img class="icon" src="https://i.postimg.cc/BnS5K0bG/instagram-logo-971166-164497.avif">
+      <div class="text"><div class="title">Instagram</div></div>
+    </a>
+
+    <a class="link coming-soon">
+      <img class="icon" src="https://abs.twimg.com/favicons/twitter.2.ico">
+      <div class="text"><div class="title">Twitter</div></div>
+    </a>
+
+    <a class="link" href="https://www.tiktok.com/@bootableusb?lang=en-GB" target="_blank">
+      <img class="icon" src="https://www.tiktok.com/favicon.ico">
+      <div class="text"><div class="title">TikTok</div></div>
+    </a>
+
+    <a class="link coming-soon">
+      <img class="icon" src="https://www.snapchat.com/favicon.ico">
+      <div class="text"><div class="title">Snapchat</div></div>
+    </a>
+
+    <a class="link" href="https://www.reddit.com/user/Flat_Pin1568/" target="_blank">
+      <img class="icon" src="https://www.redditstatic.com/favicon.ico">
+      <div class="text"><div class="title">Reddit</div></div>
+    </a>
+
+    <a class="link" href="https://mastodon.social/@BootableUSB" target="_blank">
+      <img class="icon" src="https://i.postimg.cc/bJtVBhQw/images-removebg-preview.png">
+      <div class="text"><div class="title">Mastodon</div></div>
+    </a>
+
+    <a class="link" href="https://odysee.com/@BootableUSB:3" target="_blank">
+      <img class="icon" src="https://i.postimg.cc/gJhGdr9W/bvwdwykz7geun0v3cqog.avif">
+      <div class="text"><div class="title">Odysee</div></div>
+    </a>
+
+    <a class="link" href="https://github.com/BootableUSB" target="_blank">
+      <img class="icon" src="https://github.githubassets.com/favicons/favicon.png">
+      <div class="text"><div class="title">GitHub</div></div>
+    </a>
+
+    <a class="link coming-soon">
+      <img class="icon" src="https://www.amazon.com/favicon.ico">
+      <div class="text"><div class="title">Amazon</div></div>
+    </a>
+
+    <a class="link coming-soon">
+      <img class="icon" src="https://www.ebay.com/favicon.ico">
+      <div class="text"><div class="title">eBay</div></div>
+    </a>
 
   </div>
 
