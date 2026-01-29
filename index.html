@@ -4,289 +4,242 @@
 <meta charset="UTF-8">
 <title>Australian Bootable USBs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="icon" type="image/png" href="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png">
-
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* 全局动画定义 - 高级感基础 */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes pulseSoft {
   0% { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   50% { box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
   100% { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 }
-
 @keyframes bgGradientSlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-/* 懒加载占位 & 过渡 */
 .lazy-load {
   opacity: 0;
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(15px);
 }
-
 .lazy-load.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* QR CODE */
 .qr-container { 
   position: fixed; 
-  bottom: 16px; 
-  right: 16px; 
+  bottom: 20px; 
+  right: 20px; 
   text-align: center; 
   z-index: 1000; 
   cursor: pointer;
-  animation: fadeIn 1.5s ease-out 0.5s both;
+  animation: fadeIn 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
 }
-
 .qr-text { 
   font-size: 0.7rem; 
   color: #555; 
-  margin-bottom: 6px; 
-  transition: color 0.2s ease;
+  margin-bottom: 8px; 
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .qr-image { 
   width: 96px; 
   height: 96px; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 12px; 
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12); 
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   object-fit: cover;
 }
-
 .qr-container:hover .qr-image { 
   transform: scale(1.05); 
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
-
 .qr-container:hover .qr-text {
   color: #222;
 }
-
 @media (max-width: 768px) { .qr-container { display: none; } }
-
-/* QR MODAL */
 .qr-modal { 
   position: fixed; 
   inset: 0; 
-  background: rgba(0,0,0,0.85); 
+  background: rgba(0,0,0,0.88); 
   display: none; 
   align-items: center; 
   justify-content: center; 
   z-index: 2000;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .qr-modal.active { 
   display: flex; 
   opacity: 1;
 }
-
 .qr-modal-content { 
   position: relative; 
   transform: scale(0.95);
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .qr-modal.active .qr-modal-content {
   transform: scale(1);
 }
-
 .qr-modal img { 
   width: min(90vw, 420px); 
-  border-radius: 16px; 
+  border-radius: 20px; 
   background: #fff; 
-  padding: 12px; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  padding: 16px; 
+  box-shadow: 0 12px 36px rgba(0,0,0,0.32);
 }
-
 .qr-close { 
   position: absolute; 
-  top: -14px; 
-  right: -14px; 
-  width: 36px; 
-  height: 36px; 
+  top: -16px; 
+  right: -16px; 
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%; 
   background: #111; 
   color: #fff; 
-  font-size: 22px; 
+  font-size: 24px; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
   cursor: pointer;
   border: 2px solid #fff;
-  transition: all 0.2s ease;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .qr-close:hover {
   background: #333;
   transform: scale(1.1);
 }
-
-/* PAGE */
 body { 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
   background: #f8f9fa; 
   color: #111;
   min-height: 100vh;
 }
-
 .page { 
   max-width: 420px; 
   margin: 0 auto; 
-  padding: 24px 16px 40px; 
-  animation: fadeIn 1s ease-out both;
+  padding: 32px 20px 60px; 
+  animation: fadeIn 1.8s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
-
 .header { 
   text-align: center; 
-  margin-bottom: 28px; 
-  animation: fadeInUp 1s ease-out 0.2s both;
+  margin-bottom: 36px; 
+  animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
 }
-
 .avatar { 
-  width: 120px; 
-  height: 120px; 
+  width: 128px; 
+  height: 128px; 
   border-radius: 50%; 
   object-fit: cover; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15); 
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   border: 4px solid #fff;
 }
-
 .avatar:hover {
-  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
-  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+  transform: translateY(-4px);
 }
-
 .name { 
-  margin-top: 16px; 
-  font-size: 1.6rem; 
+  margin-top: 20px; 
+  font-size: 1.75rem; 
   font-weight: 700; 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
-
 .bio { 
-  margin-top: 8px; 
-  font-size: 0.95rem; 
+  margin-top: 10px; 
+  font-size: 1rem; 
   color: #555; 
-  line-height: 1.4;
+  line-height: 1.5;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-/* LINKS */
 .links-wrapper { 
   position: relative; 
   margin: 0 auto;
 }
-
-/* Bird */
 .bird-container { 
   position: absolute; 
-  top: -35px; 
-  left: -1px; 
-  width: 48px; 
-  height: 48px; 
-  animation: fadeInUp 1s ease-out 0.4s both;
+  top: -40px; 
+  left: 0; 
+  width: 52px; 
+  height: 52px; 
+  animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
 }
-
 .bird { 
   width: 100%; 
   cursor: pointer; 
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .bird.hidden { 
   opacity: 0; 
   pointer-events: none; 
   transform: scale(0.8) rotate(10deg);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .bird:hover {
   transform: scale(1.1) rotate(-5deg);
 }
-
-/* Snake */
 .snake-container { 
   position: absolute; 
-  top: -55px; 
-  right: -1px; 
-  width: 48px; 
-  height: 48px; 
-  animation: fadeInUp 1s ease-out 0.6s both;
+  top: -60px; 
+  right: 0; 
+  width: 52px; 
+  height: 52px; 
+  animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
 }
-
 .snake { 
   width: 100%; 
   cursor: pointer; 
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .snake.hidden { 
   opacity: 0; 
   pointer-events: none; 
   transform: scale(0.8) rotate(-10deg);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .snake:hover {
   transform: scale(1.1) rotate(5deg);
 }
-
-/* Links */
 .links { 
   display: flex; 
   flex-direction: column; 
-  gap: 14px; 
-  /* 新增渐变背景动画，提升高级感 */
+  gap: 16px; 
   background: linear-gradient(120deg, #f0f4ff, #f8f9fa, #f0f4ff);
   background-size: 200% 200%;
-  animation: bgGradientSlow 15s ease infinite;
-  /* 原有背景图保留，降低透明度叠加 */
+  animation: bgGradientSlow 20s ease infinite;
   background-image: url("https://i.postimg.cc/hvFZWtnN/Screenshot-2026-01-15-14-23-12.png");
   background-blend-mode: soft-light;
   background-size: cover; 
   background-position: center; 
-  padding: 16px; 
-  border-radius: 20px; 
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  animation: fadeInUp 1s ease-out 0.8s both;
+  padding: 20px; 
+  border-radius: 24px; 
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
 }
-
 .link { 
   display: flex; 
   align-items: center; 
-  gap: 14px; 
-  height: 64px; 
-  padding: 0 16px; 
+  gap: 16px; 
+  height: 68px; 
+  padding: 0 20px; 
   background: #fff; 
-  border-radius: 14px; 
+  border-radius: 16px; 
   text-decoration: none; 
   color: #111; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
-
-/* 链接悬浮高光效果 */
 .link::before {
   content: '';
   position: absolute;
@@ -294,105 +247,97 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .link:hover::before {
   left: 100%;
 }
-
 .link:not(.coming-soon):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  color: #0a46d8;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  color: #0841d0;
 }
-
 .link:not(.coming-soon):active {
   transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .icon { 
-  width: 36px; 
-  height: 36px; 
-  border-radius: 8px; 
-  background: #f2f2f2; 
-  padding: 4px; 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 10px; 
+  background: #f5f5f5; 
+  padding: 6px; 
   object-fit: contain;
-  transition: background 0.2s ease;
+  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .link:hover .icon {
-  background: #e8f0fe;
+  background: #e6f0fe;
 }
-
 .title { 
   font-weight: 600; 
-  font-size: 0.95rem; 
+  font-size: 1rem; 
   z-index: 1;
 }
-
 .link.coming-soon { 
   pointer-events: none; 
   opacity: 0.6; 
   background: #f9f9f9;
 }
-
-/* FOOTER */
 .footer { 
-  margin-top: 32px; 
+  margin-top: 40px; 
   text-align: center; 
-  font-size: 0.8rem; 
+  font-size: 0.85rem; 
   color: #777; 
-  animation: fadeInUp 1s ease-out 1s both;
-  line-height: 1.6;
+  animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
+  line-height: 1.8;
 }
-
 .footer a {
   color: #555;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .footer a:hover {
-  color: #0a46d8;
+  color: #0841d0;
   text-decoration: underline;
+}
+@media (max-width: 480px) {
+  .page { padding: 24px 16px 50px; }
+  .header { margin-bottom: 30px; }
+  .avatar { width: 112px; height: 112px; }
+  .links { padding: 16px; gap: 14px; border-radius: 20px; }
+  .link { height: 64px; padding: 0 16px; gap: 14px; border-radius: 14px; }
+  .icon { width: 36px; height: 36px; }
+  .bird-container { width: 48px; height: 48px; top: -35px; }
+  .snake-container { width: 48px; height: 48px; top: -55px; }
 }
 </style>
 </head>
-
 <body>
-
-<!-- QR CODE -->
 <div class="qr-container" onclick="openQR()">
   <div class="qr-text">View on mobile</div>
   <img class="qr-image lazy-load" loading="lazy" src="https://i.postimg.cc/fTNmG0Gp/Guest-Cam-Qr-Code.png" alt="Mobile QR Code">
 </div>
-
 <div class="qr-modal" id="qrModal" onclick="closeQR()">
   <div class="qr-modal-content" onclick="event.stopPropagation()">
     <div class="qr-close" onclick="closeQR()">✕</div>
     <img loading="lazy" src="https://i.postimg.cc/fTNmG0Gp/Guest-Cam-Qr-Code.png" alt="Enlarged Mobile QR Code">
   </div>
 </div>
-
 <div class="page">
   <div class="header">
     <img class="avatar lazy-load" loading="lazy" src="https://reco.to/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDM4LCJwdXIiOiJibG9iX2lkIn19--2fa83de91f4f41ed7bde14d117d3c3965859c7c0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fZmlsbCI6WzE5MiwxOTJdfSwicHVyIjoidmFyaWF0aW9uIn19--5fd77165dcf00dc05ae49bc7b72974bc416c5ad7/Screenshot_2026-01-15_08-45-18.png" alt="Bootable USBs Avatar">
     <div class="name">Bootable USBs</div>
     <div class="bio">We sell super-fast, trusted, bootable Windows & Linux USBs.</div>
   </div>
-
   <div class="links-wrapper">
     <div class="bird-container">
       <img class="bird lazy-load" id="bird" loading="lazy" src="https://i.postimg.cc/CMWhJB6p/images-removebg-preview.png" alt="Bird Icon">
     </div>
-
     <div class="snake-container">
       <img class="snake lazy-load" id="snake" loading="lazy" src="https://i.postimg.cc/288sQzrF/c-HJpdm-F0ZS9sci9pb-WFn-ZXMvd2Vic2l0ZS8y-MDI0LTAx-L3Jhd3Bpe-GVs-X29m-Zmlj-ZV8z-Ml9h-X3N0d-WRpb19za-G.png" alt="Snake Icon">
     </div>
-
     <div class="links">
       <a class="link lazy-load" href="https://www.instagram.com/aberiaofficial2025/" target="_blank">
         <img class="icon" loading="lazy" src="https://i.postimg.cc/BnS5K0bG/instagram-logo-971166-164497.avif" alt="Instagram Icon">
@@ -460,64 +405,48 @@ body {
       </a>
     </div>
   </div>
-
   <div class="footer">
     <div>Contact Us</div>
     <div><a href="/cdn-cgi/l/email-protection#60151302060f1213010c052010120f140f0e4e0d05"><span class="__cf_email__" data-cfemail="bcc9cfdedad3cecfddd0d9fcccced3c8d3d292d1d9">[email&#160;protected]</span></a></div>
   </div>
 </div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-// QR弹窗功能（保留原有功能，优化体验）
 function openQR() { 
   document.getElementById('qrModal').classList.add('active'); 
-  document.body.style.overflow = 'hidden'; // 弹窗打开时禁止滚动
+  document.body.style.overflow = 'hidden';
 }
-
 function closeQR() { 
   document.getElementById('qrModal').classList.remove('active'); 
-  document.body.style.overflow = 'auto'; // 弹窗关闭时恢复滚动
+  document.body.style.overflow = 'auto';
 }
-
-// 小鸟/蛇隐藏功能（修复原有变量未获取的问题）
 document.getElementById('bird').onclick = () => {
   document.getElementById('bird').classList.add('hidden');
 };
-
 document.getElementById('snake').onclick = () => {
   document.getElementById('snake').classList.add('hidden');
 };
-
-// 懒加载实现（Intersection Observer API，高效无性能损耗）
 document.addEventListener('DOMContentLoaded', function() {
-  // 配置观察器选项
   const observerOptions = {
-    root: null, // 使用视口作为根元素
-    rootMargin: '0px 0px 50px 0px', // 元素进入视口下方50px时开始加载
-    threshold: 0.1 // 元素10%可见时触发
+    root: null,
+    rootMargin: '0px 0px 50px 0px',
+    threshold: 0.1
   };
-
-  // 创建观察器实例
   const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // 元素可见时添加visible类，触发动画
         entry.target.classList.add('visible');
-        // 停止观察已加载的元素
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
-
-  // 获取所有需要懒加载的元素并进行观察
   const lazyLoadElements = document.querySelectorAll('.lazy-load');
   lazyLoadElements.forEach(element => {
     lazyLoadObserver.observe(element);
   });
 });
 </script>
-
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"0af718dc1da545ebbc53d39249ec3d10","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"0af718dc1da545ebbc53d39249ec3d10","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
