@@ -439,72 +439,86 @@ body {
 const btn = document.querySelector(".btn");
 const orb = btn.querySelector(".orb");
 
+const MAX = 200;
+
 let startX = 0;
 let currentX = 0;
-let active = false;
 let progress = 0;
+let dragging = false;
+let completed = false;
 
-const MAX = 200; // swipe distance needed
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(n, max));
+}
 
 function setProgress(p) {
-  progress = Math.max(0, Math.min(p, MAX));
+  progress = clamp(p, 0, MAX);
   orb.style.transform = `translate(${progress}px, 0%) scale(1)`;
 }
 
-// pointer down = start interaction (click OR swipe)
+function finish() {
+  completed = true;
+  setProgress(MAX);
+
+  setTimeout(() => {
+    window.location.href = "https://www.ebay.com.au/str/AussieUSBs";
+  }, 100);
+}
+
+function animateToEnd() {
+  function step() {
+    progress += (MAX - progress) * 0.25 + 8;
+
+    setProgress(progress);
+
+    if (progress >= MAX - 1) {
+      finish();
+      return;
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
 btn.addEventListener("pointerdown", (e) => {
-  active = true;
+  if (completed) return;
+
+  dragging = true;
   startX = e.clientX;
+  currentX = 0;
 
   btn.setPointerCapture(e.pointerId);
 });
 
-// pointer move = dragging
 btn.addEventListener("pointermove", (e) => {
-  if (!active) return;
+  if (!dragging || completed) return;
 
   currentX = e.clientX - startX;
 
-  // allow both click + drag to animate progress
   setProgress(currentX);
 
-  // if reached end → redirect
   if (currentX >= MAX) {
-    active = false;
-
-    setTimeout(() => {
-      window.location.href = "https://www.ebay.com.au/str/AussieUSBs";
-    }, 150);
+    dragging = false;
+    finish();
   }
 });
 
-// pointer up = treat click like "auto swipe animation"
-btn.addEventListener("pointerup", () => {
-  if (!active) return;
+function endDrag() {
+  if (!dragging || completed) return;
 
-  active = false;
+  dragging = false;
 
-  // if user barely moved → animate to end automatically
-  if (currentX < MAX) {
-    let p = currentX;
-
-    const interval = setInterval(() => {
-      p += 10;
-      setProgress(p);
-
-      if (p >= MAX) {
-        clearInterval(interval);
-
-        window.location.href = "https://www.ebay.com.au/str/AussieUSBs";
-      }
-    }, 10);
+  if (progress >= MAX * 0.85) {
+    finish(); // snap if close enough
+  } else {
+    animateToEnd();
   }
-});
+}
 
-// reset on cancel
-btn.addEventListener("pointercancel", () => {
-  active = false;
-});
+btn.addEventListener("pointerup", endDrag);
+btn.addEventListener("pointercancel", endDrag);
 </script>
   </div>
 </div>
