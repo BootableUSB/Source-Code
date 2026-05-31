@@ -436,64 +436,73 @@ body {
     </svg>
 <script>
 const btn = document.querySelector(".btn");
+const orb = btn.querySelector(".orb");
 
-let isDown = false;
 let startX = 0;
-let moved = false;
+let currentX = 0;
+let active = false;
+let progress = 0;
 
+const MAX = 200; // swipe distance needed
+
+function setProgress(p) {
+  progress = Math.max(0, Math.min(p, MAX));
+  orb.style.transform = `translate(${progress}px, 0%) scale(1)`;
+}
+
+// pointer down = start interaction (click OR swipe)
 btn.addEventListener("pointerdown", (e) => {
-  isDown = true;
-  moved = false;
+  active = true;
   startX = e.clientX;
 
   btn.setPointerCapture(e.pointerId);
 });
 
+// pointer move = dragging
 btn.addEventListener("pointermove", (e) => {
-  if (!isDown) return;
+  if (!active) return;
 
-  const dx = e.clientX - startX;
+  currentX = e.clientX - startX;
 
-  // only count as movement if user actually drags
-  if (Math.abs(dx) > 5) {
-    moved = true;
-  }
+  // allow both click + drag to animate progress
+  setProgress(currentX);
 
-  const orb = btn.querySelector(".orb");
+  // if reached end → redirect
+  if (currentX >= MAX) {
+    active = false;
 
-  if (orb) {
-    orb.style.transform = `translate(${Math.max(0, dx)}px, 0%) scale(1)`;
-  }
-
-  // SWIPE SUCCESS
-  if (dx > 180) {
-    isDown = false;
-
-    window.location.href = "https://www.ebay.com.au";
+    setTimeout(() => {
+      window.location.href = "https://www.ebay.com.au";
+    }, 150);
   }
 });
 
+// pointer up = treat click like "auto swipe animation"
 btn.addEventListener("pointerup", () => {
-  const orb = btn.querySelector(".orb");
+  if (!active) return;
 
-  // reset orb
-  if (orb) {
-    orb.style.transform = "";
+  active = false;
+
+  // if user barely moved → animate to end automatically
+  if (currentX < MAX) {
+    let p = currentX;
+
+    const interval = setInterval(() => {
+      p += 10;
+      setProgress(p);
+
+      if (p >= MAX) {
+        clearInterval(interval);
+
+        window.location.href = "https://www.ebay.com.au";
+      }
+    }, 10);
   }
-
-  // ONLY treat as click if user did NOT drag
-  if (!moved) {
-    window.location.href = "https://aberia.site/test.html";
-  }
-
-  isDown = false;
 });
 
+// reset on cancel
 btn.addEventListener("pointercancel", () => {
-  isDown = false;
-
-  const orb = btn.querySelector(".orb");
-  if (orb) orb.style.transform = "";
+  active = false;
 });
 </script>
   </div>
