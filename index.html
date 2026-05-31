@@ -1,139 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Swipe Button Redirect</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Page</title>
 
+  <!-- CSS goes here -->
   <style>
-    /* ===== YOUR FULL CSS (UNCHANGED) ===== */
-    .liquid-container {
-      --button-width: 20em;
-      --button-height: 5em;
-      --handle-size: 4em;
-      --border-radius: 2.8em;
-      --travel-distance: calc(var(--button-width) - var(--handle-size) - 0.8em);
-      --primary-color: #718096;
-      --success-color: #00c4ff;
-      --glass-bg: rgba(255, 255, 255, 0.4);
-      --text-color: #6a7fa4;
-      --handle-color: #ffffff;
-      font-family: Poppins, sans-serif;
-      max-width: var(--button-width);
-      max-height: 27.75em;
-      perspective: 1000px;
-      margin: 100px auto;
-    }
+   /* From Uiverse.io by chandrasek_6406 */ 
+.liquid-button {
+  --button-width: 360px;
+  --button-height: 90px;
+  --handle-size: 70px;
+  --padding: 10px;
+  --bg-color: #dbe2ea;
+  --shadow-light: rgba(255, 255, 255, 0.8);
+  --shadow-dark: rgba(180, 190, 210, 0.8);
+  --text-color-light: #a3b1c9;
+  --text-unlocked: #374868;
+  --glow-color-1: #d5f7ffb1;
+  --glow-color-2: #ddffeeac;
+  --glow-color-3: #f3ffe0b4;
+  --anim-curve-flow: cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+}
 
-    .liquid-input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
+.slider-container {
+  position: relative;
+  display: block;
+  width: var(--button-width);
+  height: var(--button-height);
+  cursor: pointer;
+  border-radius: calc(var(--button-height) / 2);
+  -webkit-tap-highlight-color: transparent;
+}
 
-    .liquid-button {
-      position: relative;
-      display: block;
-      width: var(--button-width);
-      height: var(--button-height);
-      cursor: pointer;
-      user-select: none;
-      outline: none;
-      transform-style: preserve-3d;
-      transition: transform 0.4s ease;
-    }
+.toggle-input {
+  display: none;
+}
 
-    .liquid-button:hover {
-      transform: rotateX(8deg) rotateY(-10deg) scale(1.02);
-    }
+.slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  border-radius: calc(var(--button-height) / 2);
+  display: flex;
+  align-items: center;
+  box-shadow:
+    inset -8px -8px 16px var(--shadow-light),
+    inset 8px 8px 16px var(--shadow-dark),
+    -8px -8px 16px var(--shadow-light),
+    8px 8px 16px var(--shadow-dark);
+  transition: box-shadow 0.6s var(--anim-curve-flow);
+  overflow: hidden;
+}
 
-    .button-bg {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: var(--border-radius);
-      background: linear-gradient(175deg, #d3e6ff 0%, #ffffff 100%);
-      overflow: hidden;
-      box-shadow: 0 0.4em 1em rgba(0,0,0,0.15);
-    }
+.iridescent-layer {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from var(--a, 0deg) at 50% 50%,
+    var(--glow-color-1),
+    var(--glow-color-2),
+    var(--glow-color-3),
+    var(--glow-color-2),
+    var(--glow-color-1)
+  );
+  opacity: 0;
+  transition: opacity 0.8s var(--anim-curve-flow);
+  animation: shimmer 4s linear infinite paused;
+}
+.toggle-input:checked ~ .slider-track .iridescent-layer {
+  opacity: 1;
+  animation-play-state: running;
+}
 
-    .swipe-handle {
-      position: absolute;
-      left: 0.4em;
-      top: 50%;
-      transform: translateY(-50%);
-      width: var(--handle-size);
-      height: var(--handle-size);
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.8s ease;
-      z-index: 10;
-    }
+.handle {
+  position: absolute;
+  top: var(--padding);
+  left: var(--padding);
+  width: var(--handle-size);
+  height: var(--handle-size);
+  background: var(--bg-color);
+  border-radius: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    -6px -6px 12px var(--shadow-light),
+    6px 6px 12px var(--shadow-dark);
+  transform: translateX(0);
+  transition:
+    transform 0.8s var(--anim-curve-flow),
+    background-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+.toggle-input:checked ~ .slider-track .handle {
+  transform: translateX(
+    calc(var(--button-width) - var(--handle-size) - var(--padding) * 2)
+  );
+  animation: handle-flow 0.8s var(--anim-curve-flow);
+}
 
-    .icon-lock, .icon-unlock {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-    }
+.icon {
+  position: absolute;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  color: #5c6a82;
+}
+.icon-lock {
+  width: 38px;
+  height: 38px;
+  opacity: 1;
+  transform: scale(1);
+}
+.icon-unlock {
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+  transform: scale(0.6) rotate(30deg);
+  stroke-width: 2;
+  z-index: 999;
+}
+.icon-unlock .shackle {
+  transform-origin: 6px 10px;
+  transition: transform 0.5s cubic-bezier(0.5, 1.8, 0.5, 1);
+  transform: rotate(0deg);
+}
+.icon-unlock .body {
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.5, 1.8, 0.5, 1);
+  transform: scale(1);
+}
 
-    .icon-unlock {
-      opacity: 0;
-    }
+.text-labels {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.label {
+  display: flex;
+  font-size: 1.5em;
+  font-weight: 600;
+  position: absolute;
+  left: 115px;
+}
+.label-default {
+  color: var(--text-color-light);
+}
+.label-unlocked {
+  color: var(--text-unlocked);
+}
 
-    /* WHEN CHECKED (SWIPED) */
-    .liquid-input:checked + .liquid-button .swipe-handle {
-      transform: translateY(-50%) translateX(var(--travel-distance));
-      background: #00c4ff;
-    }
+.char {
+  display: inline-block;
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    transform 0.6s var(--anim-curve-flow),
+    opacity 0.6s var(--anim-curve-flow);
+}
+.label-unlocked .char {
+  transform: translateX(-30px);
+  opacity: 0;
+}
 
-    .liquid-input:checked + .liquid-button .icon-lock {
-      opacity: 0;
-    }
+.toggle-input:checked ~ .slider-track .icon-lock {
+  opacity: 0;
+  transform: scale(0.8) rotate(-30deg);
+}
+.toggle-input:checked ~ .slider-track .icon-unlock {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  transition-delay: 0.1s;
+}
+.toggle-input:checked ~ .slider-track .icon-unlock .shackle {
+  transform: rotate(-30deg);
+  transition-delay: 0.2s;
+}
+.toggle-input:checked ~ .slider-track .icon-unlock .body {
+  transform: scale(0.95);
+  transition-delay: 0.2s;
+}
 
-    .liquid-input:checked + .liquid-button .icon-unlock {
-      opacity: 1;
-    }
+.toggle-input:checked ~ .text-labels .label-default .char {
+  transform: translateX(30px);
+  opacity: 0;
+  transition-delay: calc(var(--i) * 0.02s);
+}
+.toggle-input:checked ~ .text-labels .label-unlocked .char {
+  transform: translateX(0);
+  opacity: 1;
+  transition-delay: calc(0.2s + var(--i) * 0.03s);
+}
+
+@keyframes shimmer {
+  to {
+    --a: 360deg;
+  }
+}
+@keyframes handle-flow {
+  0% {
+    transform: translateX(0) scale(1, 1);
+    border-radius: 50%;
+  }
+  20% {
+    transform: translateX(20px) scale(1.1, 0.9);
+    border-radius: 45% 55% 45% 55%;
+  }
+  50% {
+    transform: translateX(calc(var(--button-width) * 0.5)) scale(1, 1);
+    border-radius: 50%;
+  }
+  80% {
+    transform: translateX(
+        calc(
+          var(--button-width) - var(--handle-size) - var(--padding) * 2 - 20px
+        )
+      )
+      scale(1.1, 0.9);
+    border-radius: 55% 45% 55% 45%;
+  }
+  100% {
+    transform: translateX(
+        calc(var(--button-width) - var(--handle-size) - var(--padding) * 2)
+      )
+      scale(1, 1);
+    border-radius: 50%;
+  }
+}
+/
   </style>
 </head>
 
 <body>
+<!-- From Uiverse.io by chandrasek_6406 --> 
+<div class="liquid-button">
+  <label class="slider-container">
+    <input type="checkbox" class="toggle-input" />
 
-<div class="liquid-container">
-  <input type="checkbox" id="swipe-btn" class="liquid-input" />
+    <div class="slider-track">
+      <div class="iridescent-layer"></div>
 
-  <label for="swipe-btn" class="liquid-button">
-    <div class="button-bg">
-
-      <div class="swipe-handle">
-        <!-- LOCK ICON -->
-        <svg class="icon-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="black" d="M6 10h12v10H6z"/>
+      <div class="handle">
+        <svg
+          class="icon icon-lock"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect width="14" height="10" x="5" y="10.968" rx="2"></rect>
+            <path
+              d="M15.486 10.984V7.243a1.5 1.5 0 0 0-1.5-1.5h-3.972a1.5 1.5 0 0 0-1.5 1.5v3.74"
+            ></path>
+          </g>
         </svg>
-
-        <!-- UNLOCK ICON -->
-        <svg class="icon-unlock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="black" d="M12 2a4 4 0 00-4 4v2h2V6a2 2 0 114 0h2a4 4 0 00-4-4z"/>
+        <svg
+          class="icon icon-unlock"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M8 0c1.07 0 2.041.42 2.759 1.104l.14.14l.062.08a.5.5 0 0 1-.71.675l-.076-.066l-.216-.205A3 3 0 0 0 5 4v2h6.5A2.5 2.5 0 0 1 14 8.5v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7z"
+          ></path>
         </svg>
       </div>
+    </div>
 
+    <div class="text-labels">
+      <div class="label label-default">
+        <span class="char" style="--i:0">S</span
+        ><span class="char" style="--i:1">w</span
+        ><span class="char" style="--i:2">i</span
+        ><span class="char" style="--i:3">p</span
+        ><span class="char" style="--i:4">e</span
+        ><span class="char" style="--i:5">&nbsp;</span
+        ><span class="char" style="--i:6">t</span
+        ><span class="char" style="--i:7">o</span
+        ><span class="char" style="--i:8">&nbsp;</span
+        ><span class="char" style="--i:9">U</span
+        ><span class="char" style="--i:10">n</span
+        ><span class="char" style="--i:11">l</span
+        ><span class="char" style="--i:12">o</span
+        ><span class="char" style="--i:13">c</span
+        ><span class="char" style="--i:14">k</span>
+      </div>
+      <div class="label label-unlocked">
+        <span class="char" style="--i:0">U</span
+        ><span class="char" style="--i:1">n</span
+        ><span class="char" style="--i:2">l</span
+        ><span class="char" style="--i:3">o</span
+        ><span class="char" style="--i:4">c</span
+        ><span class="char" style="--i:5">k</span
+        ><span class="char" style="--i:6">e</span
+        ><span class="char" style="--i:7">d</span>
+      </div>
     </div>
   </label>
 </div>
 
-<script>
-  const swipeBtn = document.getElementById("swipe-btn");
-
-  swipeBtn.addEventListener("change", function () {
-    if (this.checked) {
-      setTimeout(() => {
-        window.location.href = "https://www.ebay.com.au";
-      }, 600);
-    }
-  });
-</script>
 
 </body>
 </html>
