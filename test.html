@@ -439,9 +439,11 @@ const btn = document.querySelector(".btn");
 
 let isDown = false;
 let startX = 0;
+let swiped = false;
 
 btn.addEventListener("pointerdown", (e) => {
   isDown = true;
+  swiped = false;
   startX = e.clientX;
   btn.setPointerCapture(e.pointerId);
 });
@@ -451,29 +453,36 @@ btn.addEventListener("pointermove", (e) => {
 
   const dx = e.clientX - startX;
 
-  // move orb visually (optional effect)
   const orb = btn.querySelector(".orb");
+
+  // move orb with finger/mouse
   if (orb) {
-    orb.style.transform = `translate(${Math.min(Math.max(dx, 0), 200)}px, 0%) scale(1)`;
+    orb.style.transform = `translate(${Math.max(0, dx)}px, 0%) scale(1)`;
   }
 
-  // if fully swiped → trigger redirect
+  // SWIPE SUCCESS CONDITION
   if (dx > 180) {
+    swiped = true;
     isDown = false;
 
     setTimeout(() => {
       window.location.href = "https://www.ebay.com.au";
-    }, 200);
+    }, 150);
   }
 });
 
 btn.addEventListener("pointerup", () => {
   isDown = false;
 
-  // reset orb position if not completed
   const orb = btn.querySelector(".orb");
+
   if (orb) {
     orb.style.transform = "";
+  }
+
+  // If user DID NOT swipe → treat as click
+  if (!swiped) {
+    window.location.href = "https://aberia.site/test.html";
   }
 });
 </script>
