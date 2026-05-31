@@ -435,13 +435,47 @@ body {
       d="m4.5 12.75 6 6 9-13.5"/>
     </svg>
 <script>
-  const btn = document.querySelector(".btn");
+const btn = document.querySelector(".btn");
 
-  btn.addEventListener("click", () => {
+let isDown = false;
+let startX = 0;
+
+btn.addEventListener("pointerdown", (e) => {
+  isDown = true;
+  startX = e.clientX;
+  btn.setPointerCapture(e.pointerId);
+});
+
+btn.addEventListener("pointermove", (e) => {
+  if (!isDown) return;
+
+  const dx = e.clientX - startX;
+
+  // move orb visually (optional effect)
+  const orb = btn.querySelector(".orb");
+  if (orb) {
+    orb.style.transform = `translate(${Math.min(Math.max(dx, 0), 200)}px, 0%) scale(1)`;
+  }
+
+  // if fully swiped → trigger redirect
+  if (dx > 180) {
+    isDown = false;
+
     setTimeout(() => {
       window.location.href = "https://www.ebay.com.au";
-    }, 500);
-  });
+    }, 200);
+  }
+});
+
+btn.addEventListener("pointerup", () => {
+  isDown = false;
+
+  // reset orb position if not completed
+  const orb = btn.querySelector(".orb");
+  if (orb) {
+    orb.style.transform = "";
+  }
+});
 </script>
   </div>
 </div>
