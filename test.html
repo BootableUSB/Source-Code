@@ -439,12 +439,13 @@ const btn = document.querySelector(".btn");
 
 let isDown = false;
 let startX = 0;
-let swiped = false;
+let moved = false;
 
 btn.addEventListener("pointerdown", (e) => {
   isDown = true;
-  swiped = false;
+  moved = false;
   startX = e.clientX;
+
   btn.setPointerCapture(e.pointerId);
 });
 
@@ -453,37 +454,46 @@ btn.addEventListener("pointermove", (e) => {
 
   const dx = e.clientX - startX;
 
+  // only count as movement if user actually drags
+  if (Math.abs(dx) > 5) {
+    moved = true;
+  }
+
   const orb = btn.querySelector(".orb");
 
-  // move orb with finger/mouse
   if (orb) {
     orb.style.transform = `translate(${Math.max(0, dx)}px, 0%) scale(1)`;
   }
 
-  // SWIPE SUCCESS CONDITION
+  // SWIPE SUCCESS
   if (dx > 180) {
-    swiped = true;
     isDown = false;
 
-    setTimeout(() => {
-      window.location.href = "https://www.ebay.com.au";
-    }, 150);
+    window.location.href = "https://www.ebay.com.au";
   }
 });
 
 btn.addEventListener("pointerup", () => {
-  isDown = false;
-
   const orb = btn.querySelector(".orb");
 
+  // reset orb
   if (orb) {
     orb.style.transform = "";
   }
 
-  // If user DID NOT swipe → treat as click
-  if (!swiped) {
+  // ONLY treat as click if user did NOT drag
+  if (!moved) {
     window.location.href = "https://aberia.site/test.html";
   }
+
+  isDown = false;
+});
+
+btn.addEventListener("pointercancel", () => {
+  isDown = false;
+
+  const orb = btn.querySelector(".orb");
+  if (orb) orb.style.transform = "";
 });
 </script>
   </div>
