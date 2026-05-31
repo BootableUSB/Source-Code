@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swipe To Confirm Button</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f1720;
+}
+
+/* From Uiverse.io by dexter-st */
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.effect-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 20, 50, 0.08);
+  filter: blur(5px) contrast(20) grayscale(0.2);
+}
+
+.btn {
+  width: 260px;
+  height: 56px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 3;
+
+  position: relative;
+  border: 12px solid rgba(255, 255, 255, 0);
+  border-radius: 50px;
+  background: #d4dbe13f;
+
+  user-select: none;
+  transition: all 0.5s ease;
+
+  box-shadow:
+    inset 0 0px 6px 3px rgba(50, 50, 50, 0.2),
+    inset 0 -4px 4px 4px rgba(0, 0, 0, 0.05),
+    0 8px 16px -8px rgba(0, 0, 0, 0.2);
+}
+
+.orb,
+.orb-2 {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background: #aaa;
+  border-radius: 50%;
+  top: -14px;
+  left: 0%;
+  transform: translate(-50%, 0%) scale(0.9);
+  transform-origin: 50% 50%;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.orb-2 {
+  background-color: var(--bg);
+  animation: orb-anim 6s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes orb-anim {
+  0% {
+    opacity: 0;
+    transform: translate(var(--x2), 0%) rotate(0deg)
+      translateX(var(--x1)) scale(var(--scale));
+  }
+
+  30%,
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--x2), 0%)
+      rotate(calc(var(--rot) * 360deg))
+      translateX(var(--x1))
+      scale(var(--scale));
+  }
+}
+
+@keyframes orb-vanish {
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes orb-hover {
+  0% {
+    left: -12.5%;
+    transform: scale(0.9);
+  }
+
+  100% {
+    left: -5%;
+    transform: scale(1.1);
+    background: rgba(128, 230, 255, 0.5);
+  }
+}
+
+@keyframes orb-focus {
+  0% {
+    left: -5%;
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1.3);
+  }
+
+  100% {
+    left: 80%;
+    transform: scale(1.1);
+  }
+}
+
+.btn:hover {
+  border: 12px solid rgba(139, 177, 177, 0.95);
+}
+
+.btn:active,
+.btn:focus {
+  border: 12px solid rgb(0, 153, 132);
+  background: rgba(0, 212, 104, 0.845);
+}
+
+.btn:hover > .orb {
+  animation: orb-hover 0.35s ease-in-out forwards;
+}
+
+.btn:hover > .orb-2 {
+  animation: orb-vanish 0.5s forwards ease-out;
+}
+
+.btn:active > .orb,
+.btn:focus > .orb {
+  animation: orb-focus 0.5s ease forwards;
+  background-color: rgb(0, 153, 128);
+}
+
+.btn:active > .orb-2,
+.btn:focus > .orb-2 {
+  background-color: #0f09;
+  animation: orb-vanish 1s forwards;
+}
+
+.text-wrapper {
+  padding-left: 20px;
+  position: relative;
+  z-index: 2;
+  color: #87a0b1;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.4s ease;
+  letter-spacing: -2px;
+  top: -1px;
+  user-select: none;
+  pointer-events: none;
+  text-shadow:
+    0 1px 1px rgba(255,255,255,0.15),
+    0 -1px 1px rgba(0,0,0,0.15);
+}
+
+.letter {
+  display: inline-block;
+}
+
+.letter:nth-child(17),
+.letter:nth-child(18),
+.letter:nth-child(19),
+.letter:nth-child(20),
+.letter:nth-child(21),
+.letter:nth-child(22),
+.letter:nth-child(23),
+.letter:nth-child(24),
+.letter:nth-child(25) {
+  display: none;
+}
+
+.container:has(.btn:hover) .text-wrapper .letter {
+  animation: letter-hover 1s ease forwards;
+}
+
+.container:has(.btn:focus) .text-wrapper .letter {
+  animation: letter-focus 1s ease forwards;
+}
+
+.container:has(.btn:focus) .text-wrapper .letter:nth-child(-n+16) {
+  display: none;
+  opacity: 0;
+}
+
+.container:has(.btn:focus) .text-wrapper .letter:nth-child(n+17) {
+  display: inline-block;
+  opacity: 0;
+}
+
+@keyframes letter-hover {
+  0% {
+    color: #8b949a;
+  }
+
+  50% {
+    color: #00c8ff;
+    transform: translateX(16px) scale(1.5);
+    filter: blur(9px);
+  }
+
+  100% {
+    color: #71d0eb;
+    transform: translateX(12px) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes letter-focus {
+  0% {
+    color: #fff0;
+  }
+
+  20% {
+    color: #00ffdd;
+    transform: translateX(-150px) scale(0);
+    opacity: .5;
+    filter: blur(20px);
+  }
+
+  100% {
+    color: #fff;
+    text-shadow:
+      0 0 21px #058335,
+      0 0 3px #fff,
+      0 0 2px #24b600;
+    transform: translateX(-22px) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.container:has(.btn:hover) .icon {
+  transform: translate(-101px,0) scale(1.1);
+}
+
+.container:has(.btn:hover) .icon .icon-svg:nth-child(1) {
+  opacity: 0;
+}
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.container:has(.btn:hover) .icon .icon-svg:nth-child(2) {
+  opacity: 1;
+}
+
+.container:has(.btn:focus) .icon {
+  transform: translate(102px,0) scale(1.1);
+}
+
+.container:has(.btn:focus) .icon .icon-svg:nth-child(1),
+.container:has(.btn:focus) .icon .icon-svg:nth-child(2) {
+  opacity: 0;
+}
+
+.container:has(.btn:focus) .icon .icon-svg:last-child {
+  opacity: 1;
+}
+
+.icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: transparent;
+  box-shadow:
+    inset 0 4px 6px 3px rgba(255,255,255,.75),
+    inset 0 -4px 4px 4px rgba(0,0,0,.05),
+    0 6px 8px -3px rgba(0,0,0,.3);
+  z-index: 1;
+  transition: transform .5s ease;
+  transform: translate(-117px,0);
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+
+.icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+
+  background-image:
+    radial-gradient(circle at 50% 90%, rgba(255,255,255,.6), transparent 40%),
+    radial-gradient(ellipse at 50% 40%, rgba(255,255,255,.5) 0%, rgba(255,255,255,.3) 40%, transparent 65%),
+    linear-gradient(180deg, rgba(0,195,255,.2) -10%, transparent 100%);
+}
+
+.icon-svg {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #9ba6aa;
+  transition: opacity .3s ease;
+  animation: stroke-anim 4s infinite linear;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5px;
+  stroke-dashoffset: 20;
+  stroke-dasharray: 0,70.3;
+}
+
+.icon-svg:nth-child(2),
+.icon-svg:last-child {
+  opacity: 0;
+}
+
+@keyframes stroke-anim {
+  30%,60% {
+    stroke-dasharray: 70.3;
+  }
+
+  15%,60% {
+    stroke: #fff;
+    stroke-width: 2.5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="effect-bg">
+
+    <button class="btn">
+      <div class="orb"></div>
+
+      <div class="orb-2"
+        style="--bg:#bef2;--scale:0.6;--x1:40px;--x2:-55%;--rot:-1;">
+      </div>
+
+      <div class="orb-2"
+        style="--bg:#aef3;--scale:0.25;--x1:50px;--x2:130px;--rot:-0.5;">
+      </div>
+
+      <div class="orb-2"
+        style="--bg:#ddf3;--scale:0.2;--x1:70px;--x2:-55%;--rot:-1.1;">
+      </div>
+
+      <div class="orb-2"
+        style="--bg:#bef2;--scale:0.35;--x1:40px;--x2:90px;--rot:1.5;">
+      </div>
+    </button>
+
+  </div>
+
+  <div class="text-wrapper">
+    <span class="letter" style="animation-delay:0s;">S</span>
+    <span class="letter" style="animation-delay:0.025s;">w</span>
+    <span class="letter" style="animation-delay:0.05s;">i</span>
+    <span class="letter" style="animation-delay:0.075s;">p</span>
+    <span class="letter" style="animation-delay:0.1s;">e</span>
+    <span class="letter" style="animation-delay:0.125s;">&nbsp;</span>
+    <span class="letter" style="animation-delay:0.15s;">t</span>
+    <span class="letter" style="animation-delay:0.175s;">o</span>
+    <span class="letter" style="animation-delay:0.2s;">&nbsp;</span>
+    <span class="letter" style="animation-delay:0.225s;">c</span>
+    <span class="letter" style="animation-delay:0.25s;">o</span>
+    <span class="letter" style="animation-delay:0.275s;">n</span>
+    <span class="letter" style="animation-delay:0.3s;">f</span>
+    <span class="letter" style="animation-delay:0.325s;">i</span>
+    <span class="letter" style="animation-delay:0.35s;">r</span>
+    <span class="letter" style="animation-delay:0.375s;">m</span>
+
+    <span class="letter">C</span>
+    <span class="letter">o</span>
+    <span class="letter">n</span>
+    <span class="letter">f</span>
+    <span class="letter">i</span>
+    <span class="letter">r</span>
+    <span class="letter">m</span>
+    <span class="letter">e</span>
+    <span class="letter">d</span>
+  </div>
+
+  <div class="icon">
+
+    <svg class="icon-svg" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/>
+    </svg>
+
+    <svg class="icon-svg" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+    </svg>
+
+    <svg class="icon-svg" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+      d="m4.5 12.75 6 6 9-13.5"/>
+    </svg>
+<script>
+  const btn = document.querySelector(".btn");
+
+  btn.addEventListener("click", () => {
+    // small delay so animation can play
+    setTimeout(() => {
+      window.location.href = "https://www.ebay.com.au";
+    }, 500);
+  });
+</script>
+  </div>
+</div>
+
+</body>
+</html>
