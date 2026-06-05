@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <title>Redirecting to Official Aussie eBay Store...</title>
     <script>
-        window.location.href = "https://www.ebay.com.au/str/AussieUSBs";
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "https://www.ebay.com.au/str/AussieUSBs";
+            }, 500); 
+        };
     </script>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="https://www.ebay.com.au/str/AussieUSBs">link to eBay</a>.</p>
+    Please wait...
 </body>
 </html>
