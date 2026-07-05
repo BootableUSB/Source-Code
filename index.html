@@ -5,25 +5,24 @@
     <meta charset="UTF-8">
     <title>Redirecting to Official Aussie eBay Store...</title>
     <style>
-        /* Removes browser margins and hides scrollbars */
+        /* Reset margins and hide scrollbars to ensure full screen coverage */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #000; /* Dark background to blend while loading */
+            background-color: #000; /* Fallback black background */
         }
 
-        /* Container designed to force the image to fill the screen and zoom in */
+        /* Container that scales and centers your Base64 image */
         .fullscreen-bg {
             width: 100%;
             height: 100%;
-            display: block;
-            /* object-fit: cover scales and crops the image to fill the screen completely */
-            object-fit: cover; 
-            /* object-position centers the zoom on the middle of the image */
-            object-position: center; 
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWAAAACjCAIAAAA7CFO1AAAAA3NCSVQICAjb4U/gAAAB8klEQVR4nO3UsREAEADAQOw/s7OA1BT/E6TK3APgbr0OAP5lEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAOiZNAkQjwCoXAAAAAElFTkSuQmCC");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain; /* Scales image up/down neatly without cropping */
         }
     </style>
     <script>
@@ -35,9 +34,7 @@
     </script>
 </head>
 <body>
-
-    <!-- The Base64 image fills the viewport automatically -->
-    <img class="fullscreen-bg" src="iVBORw0KGgoAAAANSUhEUgAAAWAAAACjCAIAAAA7CFO1AAAAA3NCSVQICAjb4U/gAAAB8klEQVR4nO3UsREAEADAQOw/s7OA1BT/E6TK3APgbr0OAP5lEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAOiZNAkQjwCoXAAAAAElFTkSuQmCC" alt="Loading...">
-
+    <!-- Fullscreen container for your image -->
+    <div class="fullscreen-bg"></div>
 </body>
 </html>
