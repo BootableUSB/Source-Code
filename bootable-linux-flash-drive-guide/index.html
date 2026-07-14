@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting to Official Aussie eBay Store...</title>
+    <style>
+        /* Forces the webpage layout to exactly match the device screen size */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* Forces the image to stretch and crop to fill 100% of the viewport */
+        .fullscreen-bg {
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWAAAACjCAIAAAA7CFO1AAAAA3NCSVQICAjb4U/gAAAB8klEQVR4nO3UsREAEADAQOw/s7OA1BT/E6TK3APgbr0OAP5lEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAMgggGQSQDAJIBgEkgwCSQQDJIIBkEEAyCCAZBJAMAkgGASSDAJJBAMkggGQQQDIIIBkEkAwCSAYBJIMAkkEAySCAZBBAOiZNAkQjwCoXAAAAAElFTkSuQmCC");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover; /* Stretches the image to completely eliminate black bars */
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "https://www.ebay.com.au/usr/aussieusbs";
+            }, 500); 
+        };
+    </script>
+</head>
+<body>
+    <div class="fullscreen-bg"></div>
+</body>
+</html>
