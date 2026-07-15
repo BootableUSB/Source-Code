@@ -1,153 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<!-- Home -->
-<url>
-  <loc>https://aberia.site/</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/</loc>
+    </url>
 
-<!-- Main pages -->
-<url>
-  <loc>https://aberia.site/index.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/sitemap.xml</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/usb.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/test.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Arch-Linux-Vs-Ubuntu-Which-Should-I-Use.html</loc>
+    </url>
 
-<!-- Archives -->
-<url>
-  <loc>https://aberia.site/index_archive.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Balena-Etcher-Vs-Ventoy-Which-Is-Better.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/index_finished.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Can-I-Keep-Windows-And-Install-Linux-Too.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/Archievee_thur_14_may.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Can-Linux-Replace-Windows.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/archeive_sun_31_may.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Debian-Vs-ubuntu-Whats-The-Differance.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/Thu-29-jan-2.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Fedora-Vs-Ubuntu-Which-Is-Better.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/thu-29-jan_archevie.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/How-Do-I-Create-A-Bootable-Linux-USB.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/Fri-30-jan.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/How-Do-I-Install-Linux.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/Index_mon-26-jan.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Is-Ventoy-Better-Than-Rufus.html</loc>
+    </url>
 
-<!-- USB pages -->
-<url>
-  <loc>https://aberia.site/usb.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Rufus-Vs-Ventoy-Which-Should-I-Use.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/usb_1.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Should-I-Dual-Boot-Linux-And-Windows.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/usb_2.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Ubuntu-Vs-Linux-Mint-Which-Is-Better.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/usb_3.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/What-is-Linux.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/usb_4.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Which-Is-Better-Rufus-Or-Balena-Etcher.html</loc>
+    </url>
 
-<!-- SEO pages folder -->
-<url>
-  <loc>https://aberia.site/seo-pages/</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Which-Linux-Distro-Is-Easiest-For-Beginner.html</loc>
+    </url>
 
-<url>
-  <loc>https://aberia.site/seo-pages/index.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/amazing_usbs.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/bootable-linux-usbs.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/bootablemelbusbs.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/file.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/linux-mint-usb-australia.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/linux-usb-melbourne.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/linux_usbs.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/melbUSBSS.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/melb_USB.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/melbounre-usbs.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/melbourneUSBS.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/melbvictoria.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/seo_friendly.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/ubuntu-usb-australia.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/usb_australia.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/vicmelbausbootusbs.html</loc>
-</url>
-
-<url>
-  <loc>https://aberia.site/seo-pages/victoriabootableaustralianlinuxusbs.html</loc>
-</url>
+    <url>
+        <loc>https://aberia.site/bootable-linux-flash-drive-guide/Which-Linux-Distro-Should-I-Choose.html</loc>
+    </url>
 
 </urlset>
